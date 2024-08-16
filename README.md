@@ -1,15 +1,27 @@
-# shopware-app-lambda
+# Shopware App Server on Lambda using DynamoDB as storage
 
-To install dependencies:
+This project uses Node.js, DynamoDB, AWS and [SST](https://ion.sst.dev/docs/) to create a serverless app that can be used as a Shopware App Server.
 
-```bash
-bun install
-```
-
-To run:
+Install the dependencies:
 
 ```bash
-bun run index.ts
+npm install
 ```
 
-This project was created using `bun init` in bun v1.1.24. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Install SST
+
+```
+brew install sst/tap/sst
+```
+
+Deploy your app
+
+```bash
+sst deploy
+```
+
+or run it in dev mode
+
+```bash
+sst dev
+```
