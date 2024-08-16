@@ -6,7 +6,7 @@ import {
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient, GetCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
-
+import { Resource } from "sst";
 
 export default class DynamoDBRepository implements ShopRepositoryInterface {
     client: DynamoDBClient;
@@ -23,7 +23,7 @@ export default class DynamoDBRepository implements ShopRepositoryInterface {
 
     async createShop(shop: ShopInterface): Promise<void> {
         const cmd = new PutCommand({
-            TableName: "shop",
+            TableName: Resource.shop.name,
             Item: {
                 id: shop.getShopId(),
                 url: shop.getShopUrl(),
@@ -38,7 +38,7 @@ export default class DynamoDBRepository implements ShopRepositoryInterface {
 
     async getShopById(id: string): Promise<ShopInterface | null> {
         const cmd = new GetCommand({
-            TableName: "shop",
+            TableName: Resource.shop.name,
             Key: {
                 id: id,
             },
@@ -62,12 +62,14 @@ export default class DynamoDBRepository implements ShopRepositoryInterface {
 
         return shop;
     }
+
     async updateShop(shop: ShopInterface): Promise<void> {
         return this.createShop(shop);
     }
+
     async deleteShop(id: string): Promise<void> {
         const cmd = new DeleteCommand({
-            TableName: "shop",
+            TableName: Resource.shop.name,
             Key: {
                 id: id,
             },
